@@ -11,24 +11,46 @@ const TanStackDemo = lazy(() => import("./tanstack/Demo"));
 function App() {
   return (
     <BrowserRouter>
-      <header style={{ padding: 16, borderBottom: "1px solid #eee" }}>
-        <Link to="/" style={{ marginRight: 12 }}>
-          Home
-        </Link>
-        <Link to="/blog">Blog</Link>
-        <Link to="/tan" style={{ marginLeft: 12 }}>
-          TanStack Demo
-        </Link>
-        <button
-          style={{ marginLeft: 12 }}
-          onClick={() => window.history.back()}
-        >
-          Back
-        </button>
+      <header className="sticky top-0 z-50 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-6">
+          <Link
+            to="/"
+            className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+          >
+            Home
+          </Link>
+          <Link
+            to="/blog"
+            className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors"
+          >
+            Blog
+          </Link>
+          <Link
+            to="/tan"
+            className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors"
+          >
+            TanStack Demo
+          </Link>
+          <button
+            onClick={() => window.history.back()}
+            className="ml-auto px-3 py-2 rounded-md text-sm font-medium bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+          >
+            ← Back
+          </button>
+        </div>
       </header>
 
       <ErrorBoundary>
-        <Suspense fallback={<div style={{ padding: 20 }}>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p className="text-slate-600 dark:text-slate-400">Loading...</p>
+              </div>
+            </div>
+          }
+        >
           <Routes>
             <Route path="/" element={<BlogList />} />
             <Route path="/blog" element={<BlogList />} />
